@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculator</title>
+</head>
+<body>
+    <section class="center-div">
+        <header>
+            <div class="header-left">
+                <p>Calculator</p>
+            </div>
+            <div class="header-right">
+                <p>-</p>
+                <p>z</p>
+                <p id="close-div">x</p>
+            </div>
+        </header>
+
+        <div class="screen p-0-10">
+            <div class="calc-mode p-10-0">
+                <img src="menu.png" alt="" />
+                <h3>Standard</h3>
+            </div>
+            <div class="show-value">
+                <p></p>
+            </div>
+            <div class="display-side">
+                <input type="text" id="content-display" placeholder="0" />
+            </div>
+            <div class="calc-memory">
+                <p class="unactive-memory">MC</p>
+                <p class="unactive-memory">MR</p>
+                <p>M+</p>
+                <p>M-</p>
+                <p>MS</p>
+                <p class="unactive-memory">M></p>
+            </div>
+        </div>
+        <div class="buttons">  
+            <div class="btn">
+                <p id="mod">%</p>
+                <p>CE</p>
+                <p id="clear">C</p>
+                <p id="delete">x</p>
+            </div>
+            <div class="btn">
+                <p>1/x</p>
+                <p id="square">x<sup>2</sup></p>
+                <p><sup>2</sup>√x</p>
+                <p class="sign" id="div">÷</p>
+            </div>
+            <div class="btn">
+                <p class="num" id="7">7</p>
+                <p class="num" id="8">8</p>
+                <p class="num" id="9">9</p>
+                <p class="sign" id="mul">x</p>
+            </div>
+            <div class="btn">
+                <p class="num" id="4">4</p>
+                <p class="num" id="5">5</p>
+                <p class="num" id="6">6</p>
+                <p class="sign" id="minus">-</p>
+            </div>
+            <div class="btn">
+                <p class="num" id="1">1</p>
+                <p class="num" id="2">2</p>
+                <p class="num" id="3">3</p>
+                <p class="sign" id="plus">+</p>
+            </div>
+            <div class="btn">
+                <p><sup>+</sup>/-</p>
+                <p class="num" id="0">0</p>
+                <p id="point">.</p>
+                <p class="sign" id="equal">=</p>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        class Arithematic {
+            sum(x, y) {
+                return x + y;
+            }
+            mul(x, y) {
+                return x * y;
+            }
+            sub(x, y) {
+                return x - y;
+            }
+            div(x, y) {
+                return x / y;
+            }
+            mod(x, y) {
+                return x % y;
+            }
+        }
+
+
+
+        var modulus = document.querySelector('#mod');
+        var del = document.querySelector('#delete');
+        var clear = document.querySelector('#clear');
+        var sq = document.querySelector('#sq');
+        
+        let sign = document.querySelectorAll('.sign')
+        let nums = document.querySelectorAll('.btn > .num')
+        let inputDisplay = document.getElementById('content-display')
+
+        var value1;
+        var value2;
+        var count = 0;
+        
+        var showValue = document.querySelector(".show-value > p");
+        
+
+        let operation = new Arithematic();
+
+    
+        sign.forEach(elem => {
+            elem.addEventListener('click', () => {
+                if(count == 0) {
+                    value1 = +inputDisplay.value;
+                    count++;
+                    showValue.innerHTML = inputDisplay.value + elem.innerHTML;
+                    inputDisplay.value = null;
+                }
+                else {
+                    value2 = +inputDisplay.value;
+
+                    switch(elem.innerHTML) {
+                        case '+':
+                            inputDisplay.value = operation.sum(value1, value2);
+                            break;
+                        case '-':
+                            inputDisplay.value = operation.sub(value1, value2);
+                            break;
+                        case 'x':
+                            inputDisplay.value = operation.mul(value1, value2);
+                            break;
+                        case '÷':
+                            inputDisplay.value = operation.sum(value1, value2);
+                            break;
+                        case '%':
+                            inputDisplay.value = operation.mod(value1, value2);
+                            break;
+                    }
+                    count = 0;
+                }
+            });
+        });
+        
+        let closeCalc = document.querySelector('#close-div');
+        
+        closeCalc.addEventListener('click', () => {
+            document.body.remove();
+        })
+
+        nums.forEach(elem => {
+            elem.addEventListener('click', () => {
+                inputDisplay.value += elem.innerHTML;
+            });
+        });
+
+        clear.addEventListener('click', () => {
+            inputDisplay.value = null;
+            value1 = null;
+            value2 = null;
+            showValue.innerHTML = '';
+        })
+        
+        
+
+        
+    </script>
+
+</body>
+</html>
