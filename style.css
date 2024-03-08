@@ -64,7 +64,9 @@ header .header-left, .header-right {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .calc-mode img {
-    width: 30px;
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
 }
 .calc-mode h3 {
     font-size: 20px;
@@ -153,8 +155,8 @@ header .header-left, .header-right {
 .p-0-10 {
     padding: 0 10px;
 }
-.p-10-0 {
-    padding: 10px 0;
+.p-13-0 {
+    padding: 13px 0;
 }
 .btn .sign {
     font-size: 19px;
